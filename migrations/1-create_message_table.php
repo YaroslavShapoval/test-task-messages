@@ -9,7 +9,7 @@ $dbOpt = [
 
 $pdo = new PDO($params['db-dsn'], $params['db-username'], $params['db-password'], $dbOpt);
 
-$sql ="CREATE TABLE test_messages (
+$sql ="CREATE TABLE IF NOT EXISTS test_messages (
      id INT(11) AUTO_INCREMENT PRIMARY KEY,
      name VARCHAR(50) NOT NULL,
      email VARCHAR(250) NOT NULL,

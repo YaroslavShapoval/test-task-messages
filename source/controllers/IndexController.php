@@ -10,4 +10,9 @@ class IndexController extends BaseController
     {
         return "Hello, world!";
     }
+
+    public function actionSomeTestThing()
+    {
+        return "Hello from somewhere!";
+    }
 }
