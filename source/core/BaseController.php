@@ -21,7 +21,6 @@ class BaseController extends Object
         }
 
         $footer = new View($this->templateFooter);
-        $footer->setField('date', date('Y-m-d H:i:s T'));
 
         $compositeView = new CompositeView;
 

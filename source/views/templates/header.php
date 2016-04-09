@@ -13,13 +13,32 @@ $username = $this->getField('username');
 <head>
     <meta charset="utf-8">
     <title>Messages</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+          crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 <header>
-    <?php if (!empty($username)): ?>
-        <p>Hello, <?= $username ?></p>
-    <?php else: ?>
-        <p>Hello, guest!</p>
-    <?php endif ?>
+
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Test</a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <?php if (!empty($username)): ?>
+                    <li class="navbar-text">Hello, <?= $username ?>!</li>
+                    <li><a href="/">Log out</a></li>
+                <?php else: ?>
+                    <li class="navbar-text">Hello, guest!</li>
+                    <li><a href="/">Log in</a></li>
+                <?php endif ?>
+            </ul>
+        </div>
+    </nav>
 </header>
