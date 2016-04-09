@@ -1,0 +1,7 @@
+# IDE settings
+.idea
+*.sublime-workspace
+*.sublime-project
+
+# composer vendor folder
+vendor
