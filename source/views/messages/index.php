@@ -31,6 +31,20 @@ $list = $this->getField('list');
         </div>
     <?php endforeach; ?>
 
+    <div class="panel panel-success hidden" id="new_message_preview">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-sm-6">
+                    <strong id="new_message_title"></strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <p id="new_message_text"></p>
+        </div>
+    </div>
+
     <div class="panel panel-info">
         <div class="panel-heading">
             <div class="panel-heading">
@@ -39,15 +53,19 @@ $list = $this->getField('list');
         </div>
 
         <div class="panel-body">
-            <form id="new_message_form">
+            <form action="/create" method="post" id="new_message_form" data-validate_url="/validate">
+                <div id="alerts">
+
+                </div>
+
                 <div class="form-group">
                     <label for="formInputName">Your name</label>
-                    <input type="text" class="form-control" id="formInputName" placeholder="Name">
+                    <input type="text" name="name" class="form-control" id="formInputName" placeholder="Name">
                 </div>
 
                 <div class="form-group">
                     <label for="formInputEmail">Email address</label>
-                    <input type="email" class="form-control" id="formInputEmail" placeholder="Your email">
+                    <input type="email" name="email" class="form-control" id="formInputEmail" placeholder="Your email">
                 </div>
 
                 <div class="form-group">

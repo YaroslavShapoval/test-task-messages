@@ -31,15 +31,15 @@ class Message extends BaseModel
         [
             'name',
             'within' => [3, 30],
-            'too_short' => 'Name cannot be less then 3 symbols length',
-            'too_long' => 'Name cannot be more then 30 symbols length',
+            'too_short' => 'cannot be less then 3 symbols length',
+            'too_long' => 'cannot be more then 30 symbols length',
         ],
 
         [
             'text',
             'within' => [3, 255],
-            'too_short' => 'Name cannot be less then 3 symbols length',
-            'too_long' => 'Name cannot be more then 255 symbols length',
+            'too_short' => 'cannot be less then 3 symbols length',
+            'too_long' => 'cannot be more then 255 symbols length',
         ],
     ];
 
@@ -47,7 +47,7 @@ class Message extends BaseModel
         [
             'email',
             'with' => '/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/',
-            'message' => 'Please enter real email address',
+            'message' => 'should be a real email address',
         ],
     ];
 }

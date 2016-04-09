@@ -20,6 +20,23 @@ class IndexController extends BaseController
     {
         $attributes = $_POST;
         $message = new Message($attributes);
-        $message->save();
+
+        if ($message->save()) {
+            return '';
+        } else {
+            return json_encode($message->errors->to_array());
+        }
+    }
+
+    public function actionValidate()
+    {
+        $attributes = $_POST;
+        $message = new Message($attributes);
+
+        if ($message->is_valid()) {
+            return '';
+        } else {
+            return json_encode($message->errors->to_array());
+        }
     }
 }

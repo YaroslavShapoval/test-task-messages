@@ -20,6 +20,7 @@ $router = new RouteCollector();
 
 $router->get('/', [\source\controllers\IndexController::className(), 'actionIndex']);
 $router->post('/create', [\source\controllers\IndexController::className(), 'actionCreate']);
+$router->post('/validate', [\source\controllers\IndexController::className(), 'actionValidate']);
 
 $dispatcher =  new Dispatcher($router->getData());
 $response = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
