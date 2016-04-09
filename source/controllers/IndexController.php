@@ -3,16 +3,23 @@
 namespace source\controllers;
 
 use source\core\BaseController;
+use source\models\Message;
 
 class IndexController extends BaseController
 {
     public function actionIndex()
     {
-        return "Hello, world!";
+        return $this->render('messages/index', [
+            'list' => Message::find('all', [
+                'order' => 'created_at DESC',
+            ]),
+        ]);
     }
 
-    public function actionSomeTestThing()
+    public function actionCreate()
     {
-        return "Hello from somewhere!";
+        $attributes = $_POST;
+        $message = new Message($attributes);
+        $message->save();
     }
 }

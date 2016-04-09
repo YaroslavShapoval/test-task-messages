@@ -8,8 +8,6 @@ if (file_exists(__DIR__.'/params-local.php')) {
     $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
     return [
-        'db-dsn' => 'mysql:host='.$url["host"].';dbname='.substr($url["path"],1),
-        'db-username' => $url["user"],
-        'db-password' => $url["pass"],
+        'db' => 'mysql://'.$url["user"].':'.$url["pass"].'@'.$url["host"].'/'.substr($url["path"],1),
     ];
 }

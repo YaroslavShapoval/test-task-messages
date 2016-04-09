@@ -1,7 +1,7 @@
 {
   "require": {
-    "phroute/phroute": "^2.1",
-    "pimple/pimple": "~3.0"
+    "php-activerecord/php-activerecord": "^1.1",
+    "phroute/phroute": "^2.1"
   },
 
   "require-dev": {
