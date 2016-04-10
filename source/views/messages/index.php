@@ -23,6 +23,20 @@ $afterCreate = $this->getField('after_create');
         </div>
     <?php endif; ?>
 
+    <div class="dropdown dropdown-order">
+        <button class="btn btn-default dropdown-toggle" type="button" id="orderBydropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Order by field
+            <span class="caret"></span>
+        </button>
+
+        <ul class="dropdown-menu" aria-labelledby="orderBydropdown">
+            <li><a href="/index/created_at-DESC">By adding date (new first)</a></li>
+            <li><a href="/index/created_at-ASC">By adding date (old first)</a></li>
+            <li><a href="/index/name-ASC">By author name</a></li>
+            <li><a href="/index/email-ASC">By author email</a></li>
+        </ul>
+    </div>
+
     <?php foreach ($list as $message): ?>
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -54,7 +68,7 @@ $afterCreate = $this->getField('after_create');
             <div class="panel-body editable">
                 <?php if (!empty($message->image_path)): ?>
                     <p>
-                        <img src="images/<?= $message->image_path ?>" alt="<?= $message->email ?>">
+                        <img src="/images/<?= $message->image_path ?>" alt="<?= $message->email ?>">
                     </p>
                 <?php endif ?>
 

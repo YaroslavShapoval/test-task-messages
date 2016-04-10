@@ -28,8 +28,8 @@
         integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
         crossorigin="anonymous"></script>
 
-<script src="js/form.js"></script>
-<script src="js/edit.js"></script>
-<script src="js/script.js"></script>
+<script src="/js/form.js"></script>
+<script src="/js/edit.js"></script>
+<script src="/js/script.js"></script>
 </body>
 </html>

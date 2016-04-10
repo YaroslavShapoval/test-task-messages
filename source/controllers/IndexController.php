@@ -8,7 +8,7 @@ use source\models\Message;
 
 class IndexController extends BaseController
 {
-    public function actionIndex()
+    public function actionIndex($order = 'created_at-DESC')
     {
         $userComponent = UserComponent::getInstance();
 
@@ -31,12 +31,14 @@ class IndexController extends BaseController
             ];
         }
 
+        $orderArr = explode('-', $order);
+
         return $this->render('messages/index', [
             'after_create' => $afterCreate,
 
             'list' => Message::find('all', [
                 'conditions' => $conditions,
-                'order' => 'created_at DESC',
+                'order' => $orderArr[0] . ' ' . $orderArr[1],
             ]),
         ]);
     }
