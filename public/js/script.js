@@ -32,4 +32,19 @@ $(function() {
     $.each($('.editable'), function(_, editable) {
         new Editable($(editable));
     });
+
+    $('.message-set-status').on('click', function() {
+        $.ajax({
+            url: $(this).data('url'),
+            method: 'PATCH',
+
+            success: function() {
+                document.location = '/';
+            },
+
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
 });

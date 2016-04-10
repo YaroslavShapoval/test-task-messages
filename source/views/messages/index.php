@@ -71,11 +71,17 @@ $afterCreate = $this->getField('after_create');
                         <button type="button" class="btn btn-primary btn-xs editable-button__edit">Edit</button>
 
                         <?php if ($message->status !== \source\models\Message::$statuses['APPROVED']): ?>
-                            <button type="button" class="btn btn-success btn-xs">Approve</button>
+                            <button type="button" class="btn btn-success btn-xs message-set-status"
+                                    data-url="/set-status/<?= $message->id ?>/<?= \source\models\Message::$statuses['APPROVED'] ?>">
+                                Approve
+                            </button>
                         <?php endif ?>
 
                         <?php if ($message->status !== \source\models\Message::$statuses['DECLINED']): ?>
-                            <button type="button" class="btn btn-danger btn-xs">Decline</button>
+                            <button type="button" class="btn btn-danger btn-xs message-set-status"
+                                    data-url="/set-status/<?= $message->id ?>/<?= \source\models\Message::$statuses['DECLINED'] ?>">
+                                Decline
+                            </button>
                         <?php endif ?>
                     </p>
                 <?php endif ?>

@@ -27,6 +27,7 @@ $router->get('/', [\source\controllers\IndexController::className(), 'actionInde
 $router->post('/create', [\source\controllers\IndexController::className(), 'actionCreate']);
 $router->post('/validate/{id}?', [\source\controllers\IndexController::className(), 'actionValidate']);
 $router->post('/edit/{id}', [\source\controllers\IndexController::className(), 'actionEdit']);
+$router->patch('/set-status/{id}/{status}', [\source\controllers\IndexController::className(), 'actionSetStatus']);
 
 $router->get('/login', [\source\controllers\LoginController::className(), 'actionIndex']);
 $router->post('/login/validate', [\source\controllers\LoginController::className(), 'actionValidate']);

@@ -93,6 +93,24 @@ class IndexController extends BaseController
         }
     }
 
+    public function actionSetStatus($id, $status = 0)
+    {
+        $userComponent = UserComponent::getInstance();
+
+        if ($userComponent->isGuest()) {
+            return '';
+        }
+
+        $message = $this->findMessageById($id);
+        $message->status = $status;
+
+        if ($message->save()) {
+            return '';
+        } else {
+            return json_encode($message->errors->to_array());
+        }
+    }
+
     /**
      * @param $id
      * @return Message
