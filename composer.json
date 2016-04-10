@@ -14,5 +14,11 @@
     "psr-0": {
       "source": ""
     }
+  },
+
+  "scripts": {
+    "post-install-cmd": [
+      "sh post-install-cmd.sh"
+    ]
   }
 }
