@@ -1,0 +1,1 @@
+ALTER TABLE test_messages ADD COLUMN `image_path` VARCHAR(64) AFTER `text`;

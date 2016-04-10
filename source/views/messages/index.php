@@ -52,13 +52,20 @@ $afterCreate = $this->getField('after_create');
             </div>
 
             <div class="panel-body editable">
+                <?php if (!empty($message->image_path)): ?>
+                    <p>
+                        <img src="images/<?= $message->image_path ?>" alt="<?= $message->email ?>">
+                    </p>
+                <?php endif ?>
+
                 <p class="editable-text"><?= $message->text ?></p>
 
                 <form action="/edit/<?= $message->id ?>" method="post" data-validate_url="/validate/<?= $message->id ?>">
                     <div class="form-group editable-area">
                         <label>Update message</label>
-                    <textarea class="form-control" name="text"
-                              rows="4" placeholder="Message"><?= $message->text ?></textarea>
+                        <textarea class="form-control" name="text" rows="4" placeholder="Message">
+                            <?= $message->text ?>
+                        </textarea>
                     </div>
                 </form>
 
@@ -116,7 +123,7 @@ $afterCreate = $this->getField('after_create');
             $user = $userComponent->getUserModel();
             ?>
 
-            <form action="/create" method="post" id="new_message_form" data-validate_url="/validate">
+            <form action="/create" method="post" enctype="multipart/form-data" id="new_message_form" data-validate_url="/validate">
                 <div id="alerts"></div>
 
                 <div class="form-group">
@@ -135,6 +142,11 @@ $afterCreate = $this->getField('after_create');
                     <label for="formInputText">Message</label>
                     <textarea class="form-control" name="text" id="formInputText"
                               rows="4" placeholder="Message"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="formInputImage">Image</label>
+                    <input name="image" type="file" id="formInputImage">
                 </div>
 
                 <div class="text-right">

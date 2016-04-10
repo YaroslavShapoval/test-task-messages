@@ -1,5 +1,6 @@
 {
   "require": {
+    "ext-imagick": "*",
     "php-activerecord/php-activerecord": "^1.1",
     "phroute/phroute": "^2.1"
   },

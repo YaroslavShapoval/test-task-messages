@@ -17,7 +17,7 @@ var Form = function($form) {
             });
             return o;
         } else {
-            return this.form.serialize();
+            return new FormData(this.form[0]);
         }
     };
 
@@ -26,7 +26,7 @@ var Form = function($form) {
         var url = this.form.data('validate_url');
         this.clearErrors();
 
-        $.post(url, this.getData(), function(data) {
+        $.post(url, this.form.serialize(), function(data) {
             if (!data) {
                 callback.apply(self);
             } else {
@@ -53,13 +53,26 @@ var Form = function($form) {
         var self = this;
         var url = this.form.attr('action');
 
-        $.post(url, this.getData(), function(data) {
-            if (!data) {
-                callback.apply(self);
-            } else {
-                $.each(data, function(fieldName, messages) {
-                    for (var i = 0; i < messages.length; i++) self.addError(messages[i]);
-                });
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: this.getData(),
+            cache: false,
+            processData: false,
+            contentType: false,
+
+            success: function(data) {
+                if (!data) {
+                    callback.apply(self);
+                } else {
+                    $.each(data, function(fieldName, messages) {
+                        for (var i = 0; i < messages.length; i++) self.addError(messages[i]);
+                    });
+                }
+            },
+
+            error: function(jqXHR, textStatus) {
+                console.log(textStatus);
             }
         });
     };
