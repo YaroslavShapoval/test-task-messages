@@ -31,7 +31,7 @@ class IndexController extends BaseController
             ];
         }
 
-        $orderArr = explode('-', $order);
+        $orderArr = explode('-', htmlspecialchars($order));
 
         return $this->render('messages/index', [
             'after_create' => $afterCreate,

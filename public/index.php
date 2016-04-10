@@ -24,7 +24,7 @@ $userComponent->checkUserSession();
 $router = new RouteCollector();
 
 $router->get('/', [\source\controllers\IndexController::className(), 'actionIndex']);
-$router->get('/index/{order_field}?/{order_dir}?', [\source\controllers\IndexController::className(), 'actionIndex']);
+$router->get('/index/{order}?', [\source\controllers\IndexController::className(), 'actionIndex']);
 $router->post('/create', [\source\controllers\IndexController::className(), 'actionCreate']);
 $router->post('/validate/{id}?', [\source\controllers\IndexController::className(), 'actionValidate']);
 $router->post('/edit/{id}', [\source\controllers\IndexController::className(), 'actionEdit']);
