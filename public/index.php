@@ -16,11 +16,22 @@ $cfg->set_connections([
     'development' => $params['db'],
 ]);
 
+session_start();
+
+$userComponent = \source\core\components\UserComponent::getInstance();
+$userComponent->checkUserSession();
+
 $router = new RouteCollector();
 
 $router->get('/', [\source\controllers\IndexController::className(), 'actionIndex']);
 $router->post('/create', [\source\controllers\IndexController::className(), 'actionCreate']);
-$router->post('/validate', [\source\controllers\IndexController::className(), 'actionValidate']);
+$router->post('/validate/{id}?', [\source\controllers\IndexController::className(), 'actionValidate']);
+$router->post('/edit/{id}', [\source\controllers\IndexController::className(), 'actionEdit']);
+
+$router->get('/login', [\source\controllers\LoginController::className(), 'actionIndex']);
+$router->post('/login/validate', [\source\controllers\LoginController::className(), 'actionValidate']);
+$router->post('/login', [\source\controllers\LoginController::className(), 'actionLogin']);
+$router->get('/logout', [\source\controllers\LoginController::className(), 'actionLogout']);
 
 $dispatcher =  new Dispatcher($router->getData());
 $response = $dispatcher->dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);

@@ -54,9 +54,7 @@ $list = $this->getField('list');
 
         <div class="panel-body">
             <form action="/create" method="post" id="new_message_form" data-validate_url="/validate">
-                <div id="alerts">
-
-                </div>
+                <div id="alerts"></div>
 
                 <div class="form-group">
                     <label for="formInputName">Your name</label>

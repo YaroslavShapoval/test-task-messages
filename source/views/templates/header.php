@@ -33,10 +33,10 @@ $username = $this->getField('username');
             <ul class="nav navbar-nav navbar-right">
                 <?php if (!empty($username)): ?>
                     <li class="navbar-text">Hello, <?= $username ?>!</li>
-                    <li><a href="/">Log out</a></li>
+                    <li><a href="/logout">Log out</a></li>
                 <?php else: ?>
                     <li class="navbar-text">Hello, guest!</li>
-                    <li><a href="/">Log in</a></li>
+                    <li><a href="/login">Log in</a></li>
                 <?php endif ?>
             </ul>
         </div>

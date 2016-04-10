@@ -90,20 +90,32 @@ var Form = function($form) {
 };
 
 $(function() {
-    var form = new Form($('#new_message_form'));
+    var newMessageForm = new Form($('#new_message_form'));
 
     $('#message_preview_button').click(function() {
-        form.validate(function() {
-            form.preview();
+        newMessageForm.validate(function() {
+            newMessageForm.preview();
         });
     });
 
-    form.form.on('submit', function(event) {
+    newMessageForm.form.on('submit', function(event) {
         event.preventDefault();
 
-        form.validate(function() {
-            form.create(function() {
+        newMessageForm.validate(function() {
+            newMessageForm.create(function() {
                 document.location.reload(true);
+            });
+        });
+    });
+
+    var loginForm = new Form($('#login_form'));
+
+    loginForm.form.on('submit', function(event) {
+        event.preventDefault();
+
+        loginForm.validate(function() {
+            loginForm.create(function() {
+                document.location = '/';
             });
         });
     });

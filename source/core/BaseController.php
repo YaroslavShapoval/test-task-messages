@@ -2,6 +2,7 @@
 
 namespace source\core;
 
+use source\core\components\UserComponent;
 use source\core\view\CompositeView;
 use source\core\view\View;
 
@@ -10,10 +11,13 @@ class BaseController extends Object
     public $templateHeader = 'templates/header';
     public $templateFooter = 'templates/footer';
 
-    public function render($file, $variables)
+    public function render($file, $variables = [])
     {
+        $userComponent = UserComponent::getInstance();
+        $user = $userComponent->getUserModel();
+
         $header = new View($this->templateHeader);
-        $header->setField('username', '');
+        $header->setField('username', !empty($user) ? $user->getUsername() : '');
 
         $body = new View($file);
         foreach ($variables as $variable => $value) {
