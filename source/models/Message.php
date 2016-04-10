@@ -14,11 +14,17 @@ use source\core\BaseModel;
  * @property string $text
  * @property string $created_at
  * @property string $updated_at
- * @property integer $is_approved
+ * @property integer $status
  * @property integer $is_edited
  */
 class Message extends BaseModel
 {
+    static $statuses = [
+        'UNAPPROVED' => 0,
+        'APPROVED'   => 10,
+        'DECLINED'   => 20,
+    ];
+
     static $table_name = 'test_messages';
 
     static $validates_presence_of = [
@@ -50,4 +56,11 @@ class Message extends BaseModel
             'message' => 'should be a real email address',
         ],
     ];
+
+    public function validate()
+    {
+        if (!in_array($this->status, self::$statuses)) {
+            $this->errors->add('status', "should be within allowed values");
+        }
+    }
 }

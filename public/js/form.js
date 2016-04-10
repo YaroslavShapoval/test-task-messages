@@ -49,7 +49,7 @@ var Form = function($form) {
         $('#new_message_text').text(formData['text']);
     };
 
-    this.create = function(callback) {
+    this.submit = function(callback) {
         var self = this;
         var url = this.form.attr('action');
 
@@ -88,35 +88,3 @@ var Form = function($form) {
         $alerts.append(alert);
     };
 };
-
-$(function() {
-    var newMessageForm = new Form($('#new_message_form'));
-
-    $('#message_preview_button').click(function() {
-        newMessageForm.validate(function() {
-            newMessageForm.preview();
-        });
-    });
-
-    newMessageForm.form.on('submit', function(event) {
-        event.preventDefault();
-
-        newMessageForm.validate(function() {
-            newMessageForm.create(function() {
-                document.location.reload(true);
-            });
-        });
-    });
-
-    var loginForm = new Form($('#login_form'));
-
-    loginForm.form.on('submit', function(event) {
-        event.preventDefault();
-
-        loginForm.validate(function() {
-            loginForm.create(function() {
-                document.location = '/';
-            });
-        });
-    });
-});

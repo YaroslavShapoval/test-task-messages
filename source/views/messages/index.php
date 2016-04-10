@@ -3,30 +3,82 @@
 /**
  * @var \source\core\view\View $this
  * @var \source\models\Message[] $list
+ * @var boolean $afterCreate
  */
 
+$userComponent = \source\core\components\UserComponent::getInstance();
+
 $list = $this->getField('list');
+$afterCreate = $this->getField('after_create');
 ?>
 
 <div class="container">
+    <?php if ($afterCreate): ?>
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+
+            <strong>Well done!</strong> Your message will be displayed after moderation.
+        </div>
+    <?php endif; ?>
+
     <?php foreach ($list as $message): ?>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-sm-6">
                         <strong><?= $message->name ?> (<?= $message->email ?>)</strong>
+
+                        <?php if ($message->is_edited): ?>
+                            <span class="label label-default">Changed By Moderator</span>
+                        <?php endif ?>
                     </div>
 
                     <div class="col-sm-6 text-right">
                         <?= $message->created_at ?>
+
+                        <?php if (!$userComponent->isGuest()): ?>
+                            <?php
+                            $messageLabel = \source\helpers\MessageHelper::getMessageLabel($message);
+                            $messageText = \source\helpers\MessageHelper::getMessageText($message);
+                            ?>
+                            <span class="label label-<?= $messageLabel ?>">
+                                <?= $messageText ?>
+                            </span>
+                        <?php endif ?>
                     </div>
                 </div>
             </div>
 
-            <div class="panel-body">
-                <p>
-                    <?= $message->text ?>
-                </p>
+            <div class="panel-body editable">
+                <p class="editable-text"><?= $message->text ?></p>
+
+                <form action="/edit/<?= $message->id ?>" method="post" data-validate_url="/validate/<?= $message->id ?>">
+                    <div class="form-group editable-area">
+                        <label>Update message</label>
+                    <textarea class="form-control" name="text"
+                              rows="4" placeholder="Message"><?= $message->text ?></textarea>
+                    </div>
+                </form>
+
+                <?php if (!$userComponent->isGuest()): ?>
+                    <p class="text-right">
+                        <button type="button" class="btn btn-success btn-sm editable-button__save">Edit</button>
+                    </p>
+
+                    <p class="text-right">
+                        <button type="button" class="btn btn-primary btn-xs editable-button__edit">Edit</button>
+
+                        <?php if ($message->status !== \source\models\Message::$statuses['APPROVED']): ?>
+                            <button type="button" class="btn btn-success btn-xs">Approve</button>
+                        <?php endif ?>
+
+                        <?php if ($message->status !== \source\models\Message::$statuses['DECLINED']): ?>
+                            <button type="button" class="btn btn-danger btn-xs">Decline</button>
+                        <?php endif ?>
+                    </p>
+                <?php endif ?>
             </div>
         </div>
     <?php endforeach; ?>
@@ -53,17 +105,24 @@ $list = $this->getField('list');
         </div>
 
         <div class="panel-body">
+            <?php
+            /** @var \source\models\User $user */
+            $user = $userComponent->getUserModel();
+            ?>
+
             <form action="/create" method="post" id="new_message_form" data-validate_url="/validate">
                 <div id="alerts"></div>
 
                 <div class="form-group">
                     <label for="formInputName">Your name</label>
-                    <input type="text" name="name" class="form-control" id="formInputName" placeholder="Name">
+                    <input type="text" name="name" class="form-control" id="formInputName"
+                           placeholder="Name" value="<?= $user ? $user->name : '' ?>">
                 </div>
 
                 <div class="form-group">
                     <label for="formInputEmail">Email address</label>
-                    <input type="email" name="email" class="form-control" id="formInputEmail" placeholder="Your email">
+                    <input type="email" name="email" class="form-control" id="formInputEmail"
+                           placeholder="Your email" value="<?= $user ? $user->email : '' ?>">
                 </div>
 
                 <div class="form-group">

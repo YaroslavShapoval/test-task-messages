@@ -29,5 +29,7 @@
         crossorigin="anonymous"></script>
 
 <script src="js/form.js"></script>
+<script src="js/edit.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>

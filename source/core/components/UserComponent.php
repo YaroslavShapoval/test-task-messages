@@ -39,6 +39,11 @@ class UserComponent extends Object
         return $this->user;
     }
 
+    public function isGuest()
+    {
+        return $this->user === null;
+    }
+
     /**
      * @return bool
      */

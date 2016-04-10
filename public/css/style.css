@@ -1,3 +1,31 @@
+.editable-text {
+    display: block;
+}
+.editable__active .editable-text {
+    display: none;
+}
+
+.editable-area {
+    display: none;
+}
+.editable__active .editable-area {
+    display: block;
+}
+
+.editable-button__save {
+    display: none;
+}
+.editable__active .editable-button__save {
+    display: inline-block;
+}
+
+.editable-button__edit {
+    display: inline-block;
+}
+.editable__active .editable-button__edit {
+    display: none;
+}
+
 .footer {
     height: 60px;
     margin-top: 100px;
