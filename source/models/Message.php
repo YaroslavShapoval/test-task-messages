@@ -79,9 +79,7 @@ class Message extends BaseModel
             return $this->errors->to_array();
         }
 
-        $imageFile = $_FILES['image'];
-
-        if (!empty($imageFile) && !empty($imagePath = $this->uploadImage($imageFile))) {
+        if (isset($_FILES['image']) && !empty($imageFile = $_FILES['image']) && !empty($imagePath = $this->uploadImage($imageFile))) {
              $this->image_path = $imagePath;
         }
 
